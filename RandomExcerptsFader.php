@@ -3,7 +3,7 @@
 Plugin Name: Random Excerpts Fader
 Plugin URI: http://www.jackreichert.com/2010/09/random-excerpts-fader/
 Description: Creates a widget that takes randomly a number of excerpts from a category of your choice and fades them in and out. Perfect for displaying testimonials.
-Version: 1.0
+Version: 1.1
 Author: Jack Reichert	
 Author URI: http://www.jackreichert.com/about
 License: GPLv2
@@ -91,7 +91,7 @@ class reFader extends WP_Widget {
 <?php	} 
 
 	function css_header() {
-		echo '<link href="'.get_bloginfo('url').'/wp-content/plugins/RandomExcerptsFader/RandomExcerptsFader.css" rel="stylesheet" type="text/css">';
+		echo '<link href="'.get_bloginfo('url').'/wp-content/plugins/random-excerpts-fader/RandomExcerptsFader.css" rel="stylesheet" type="text/css">';
 	}
 
 	function RandomExcerptsFader($instance) { ?>
@@ -113,5 +113,5 @@ class reFader extends WP_Widget {
 // Register the widget.
 add_action('widgets_init', create_function('', 'return register_widget("reFader");'));
 wp_enqueue_script("jquery");
-wp_enqueue_script('reFader_js', get_bloginfo('url').'/wp-content/plugins/RandomExcerptsFader/RandomExcerptsFader.js', array('jquery'));                        
+wp_enqueue_script('reFader_js', get_bloginfo('url').'/wp-content/plugins/random-excerpts-fader/RandomExcerptsFader.js', array('jquery'));                        
 ?>

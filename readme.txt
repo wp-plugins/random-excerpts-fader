@@ -30,5 +30,9 @@ The foo bar is not a problem here. Don't worry about it.
 
 == Changelog ==
 
+= 1.1 =
+
+* Fix for includes.
+
 = 1.0 =
 * This is the first live version
