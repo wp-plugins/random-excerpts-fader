@@ -30,6 +30,10 @@ The foo bar is not a problem here. Don't worry about it.
 
 == Changelog ==
 
+= 1.2 =
+
+* Replaced deprecated the_content_rss() with custom function.
+
 = 1.1 =
 
 * Fix for includes.
