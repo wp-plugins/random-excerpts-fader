@@ -29,6 +29,9 @@ Yes.
 The foo bar is not a problem here. Don't worry about it.
 
 == Changelog ==
+= 1.2.3 =
+* Switched loop to get_posts.
+
 = 1.2.2 =
 
 * Styles enqueued properly.
