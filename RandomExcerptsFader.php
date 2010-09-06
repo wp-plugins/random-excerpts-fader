@@ -3,7 +3,7 @@
 Plugin Name: Random Excerpts Fader
 Plugin URI: http://www.jackreichert.com/2010/09/random-excerpts-fader/
 Description: Creates a widget that takes randomly a number of excerpts from a category of your choice and fades them in and out. Perfect for displaying testimonials.
-Version: 1.2.1
+Version: 1.2.2
 Author: Jack Reichert	
 Author URI: http://www.jackreichert.com/about
 License: GPLv2
@@ -31,7 +31,6 @@ class reFader extends WP_Widget {
 	function reFader() { 	// The widget construct. Initiating our plugin data.
 		$widgetData = array( 'classname' => 'reFader', 'description' => __( 'Display excerpts from a category of your choice and fades them in and out... jQuery Style!' ) );
 		$this->WP_Widget('reFader', __('Random Excerpts Fader'), $widgetData);
-		add_action( 'wp_head', array(&$this, 'css_header') );
 	} 
 
 	function widget($args, $instance) { // Displays the widget on the screen.
@@ -90,23 +89,16 @@ class reFader extends WP_Widget {
 		</div>
 <?php	} 
 
-	function css_header() {
-		echo '<link href="'.get_bloginfo('url').'/wp-content/plugins/random-excerpts-fader/RandomExcerptsFader.css" rel="stylesheet" type="text/css">';
-	}
-
-	function truncWords($string, $words = 55)
-	{
+	function truncWords($string, $words = 55) { //creates custom size excerpt
 	    $string = explode(' ', strip_tags($string));
-	
-	    if (count($string) > $words)
-	    {
+	    if (count($string) > $words) {
 	        return implode(' ', array_slice($string, 0, $words));
 	    }
 	
 	    return implode(' ', $string);
 	}
 
-	function RandomExcerptsFader($instance) { ?>
+	function RandomExcerptsFader($instance) { // gets the posts ?>
 		<div id="RandomExcerpts">
 		<?php $temp_query = $wp_query;
 			query_posts('showposts='.$instance['amount'].'&cat='.$instance['cat'].'&orderby=rand');
@@ -125,5 +117,7 @@ class reFader extends WP_Widget {
 // Register the widget.
 add_action('widgets_init', create_function('', 'return register_widget("reFader");'));
 wp_enqueue_script("jquery");
-wp_enqueue_script('reFader_js', get_bloginfo('url').'/wp-content/plugins/random-excerpts-fader/RandomExcerptsFader.js', array('jquery'));                        
+wp_enqueue_script('reFader_js', WP_PLUGIN_URL.'/random-excerpts-fader/RandomExcerptsFader.js', array('jquery')); 
+wp_register_style('reFaderStylesheet', WP_PLUGIN_URL . '/random-excerpts-fader/RandomExcerptsFader.css');
+wp_enqueue_style( 'reFaderStylesheet');                       
 ?>
