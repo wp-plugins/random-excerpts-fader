@@ -3,7 +3,7 @@
 Plugin Name: Random Excerpts Fader
 Plugin URI: http://www.jackreichert.com/2010/09/random-excerpts-fader/
 Description: Creates a widget that takes randomly a number of excerpts from a category of your choice and fades them in and out. Perfect for displaying testimonials.
-Version: 1.2.4
+Version: 1.2.5
 Author: Jack Reichert	
 Author URI: http://www.jackreichert.com/about
 License: GPLv2
@@ -104,7 +104,7 @@ class reFader extends WP_Widget {
 			$excerpts = get_posts('showposts='.$instance['amount'].'&cat='.$instance['cat'].'&orderby=rand');
 			foreach($excerpts as $excerpt) : ?>
 				<p class="hide">"<?php echo $this->truncWords($excerpt->post_content, $instance['length']); ?>"<br />
-				<span class="testimonial-title"><?php echo (($instance['linked']=='yes') ? '<a href="'.get_permalink($excerpt->ID).'">'.$excerpt->post_title.'</a>' : get_the_title()); ?></span></p>
+				<span class="testimonial-title"><?php echo (($instance['linked']=='yes') ? '<a href="'.get_permalink($excerpt->ID).'">'.$excerpt->post_title.'</a>' : $excerpt->post_title); ?></span></p>
 	<?php 	endforeach; ?>
 			<div id="duration"><?php echo $instance['duration']; ?></div>
 		</div>		

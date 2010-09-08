@@ -29,6 +29,9 @@ Yes.
 The foo bar is not a problem here. Don't worry about it.
 
 == Changelog ==
+= 1.2.5 =
+* Fixed title when not linked
+
 = 1.2.4 =
 * fixed linking bug (thanks to Martin).
 
