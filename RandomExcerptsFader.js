@@ -6,7 +6,6 @@ function RandomPostFader_js() {
 	var $duration = $j('#RandomExcerpts #duration').text();
 	if (parseInt($duration) < 1000){ $fade = parseInt($duration); 
 	} else { $fade = 1000; }
-	console.log($fade);
     if ( $active.length == 0 ) $active = $j('#RandomExcerpts p:last');
 
     var $next =  $active.next('p').length ? $active.next('p')
