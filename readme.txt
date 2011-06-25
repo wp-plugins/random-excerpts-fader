@@ -31,7 +31,7 @@ The foo bar is not a problem here. Don't worry about it.
 == Changelog ==
 = 1.2.7 =
 * Tested on 3.2 RC1
-* "all categories" had stopped working in this version - Fixed.
+* "all categories" option in widget options had stopped working in wp 3.2RC1 - Fixed.
 
 
 = 1.2.5 =
