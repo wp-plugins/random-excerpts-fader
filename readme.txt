@@ -29,7 +29,7 @@ Yes.
 The foo bar is not a problem here. Don't worry about it.
 
 == Changelog ==
-= 1.2.6 =
+= 1.2.7 =
 * Tested on 3.2 RC1
 * "all categories" had stopped working in this version - Fixed.
 
