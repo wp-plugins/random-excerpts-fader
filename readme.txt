@@ -29,9 +29,14 @@ Yes.
 The foo bar is not a problem here. Don't worry about it.
 
 == Changelog ==
+= 1.3 =
+* Fixed IE bugs
+* Rewrote the js to make it more efficient
+* Added fixed height option
+
 = 1.2.7 =
 * Tested on 3.2 RC1
-* "all categories" option in widget options had stopped working in wp 3.2RC1 - Fixed.
+* "all categories" had stopped working in this version - Fixed.
 
 
 = 1.2.5 =

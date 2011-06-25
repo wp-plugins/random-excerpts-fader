@@ -3,7 +3,7 @@
 Plugin Name: Random Excerpts Fader
 Plugin URI: http://www.jackreichert.com/2010/09/random-excerpts-fader/
 Description: Creates a widget that takes randomly a number of excerpts from a category of your choice and fades them in and out. Perfect for displaying testimonials.
-Version: 1.2.7
+Version: 1.3
 Author: Jack Reichert	
 Author URI: http://www.jackreichert.com/about
 License: GPLv2
@@ -83,6 +83,11 @@ class reFader extends WP_Widget {
 				<input type="text" size="5" name="<?php echo $this->get_field_name('duration'); ?>" id="<?php echo $this->get_field_id('duration'); ?>" value="<?php echo $instance['duration']; ?>" />
 			</p>
 			<p>
+				<label for="<?php echo $this->get_field_id('height'); ?>">Widget Height:</label>			
+				<input type="text" size="5" name="<?php echo $this->get_field_name('height'); ?>" id="<?php echo $this->get_field_id('height'); ?>" value="<?php echo $instance['height']; ?>" /> px<br>
+				<span style="font-size:10px;">Leave Blank for auto height</span>
+			</p>			
+			<p>
 				<label for="<?php echo $this->get_field_id('linked'); ?>">Link title to post?</label>			
 				<input type="checkbox" name="<?php echo $this->get_field_name('linked'); ?>" id="<?php echo $this->get_field_id('linked'); ?>" value="yes" <?php echo (($instance['linked']=='yes')?'checked="checked"':''); ?> />
 			</p>
@@ -99,11 +104,11 @@ class reFader extends WP_Widget {
 	}
 
 	function RandomExcerptsFader($instance) { // gets the posts ?>
-		<div id="RandomExcerpts">
+		<div id="RandomExcerpts" <?php echo ($instance['height']!='') ? 'style="height:'.$instance['height'].'px"' : ''; ?>>
 		<?php 
 			$excerpts = get_posts('showposts='.$instance['amount'].(($instance['cat']!='-1')?'&cat='.$instance['cat']:'').'&orderby=rand');
 			foreach($excerpts as $excerpt) : ?>
-				<p class="hide">"<?php echo $this->truncWords($excerpt->post_content, $instance['length']); ?>"<br />
+				<p>"<?php echo $this->truncWords($excerpt->post_content, $instance['length']); ?>"<br />
 				<span class="testimonial-title"><?php echo (($instance['linked']=='yes') ? '<a href="'.get_permalink($excerpt->ID).'">'.$excerpt->post_title.'</a>' : $excerpt->post_title); ?></span></p>
 	<?php 	endforeach; ?>
 			<div id="duration"><?php echo $instance['duration']; ?></div>

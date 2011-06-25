@@ -1,7 +1,5 @@
-#RandomExcerpts { position:relative; overflow: hidden; }
-#RandomExcerpts p { font-style: italic; position:absolute; top:0; left:0; z-index:8; opacity: 0.0; padding: 5px 0 0; }
+#RandomExcerpts { position:relative; overflow: hidden; height: auto; }
+#RandomExcerpts p { font-style: italic; z-index:5; display: none; padding: 5px 0 0; height: auto; }
 #RandomExcerpts p span.testimonial-title { font-size: 10px; display: block; margin-top: 8px; }
-#RandomExcerpts p.active { z-index:10; opacity: 1.0; }
-#RandomExcerpts p.last-active { z-index:9; }
-#RandomExcerpts p.hide { display: none; opacity:0.0; }
+#RandomExcerpts p.active { z-index:10; display: block; }
 #RandomExcerpts #duration { display: none; }
