@@ -101,7 +101,7 @@ class reFader extends WP_Widget {
 	function RandomExcerptsFader($instance) { // gets the posts ?>
 		<div id="RandomExcerpts">
 		<?php 
-			$excerpts = get_posts('showposts='.$instance['amount'].'&cat='.$instance['cat'].'&orderby=rand');
+			$excerpts = get_posts('showposts='.$instance['amount'].(($instance['cat']!='-1')?'&cat='.$instance['cat']:'').'&orderby=rand');
 			foreach($excerpts as $excerpt) : ?>
 				<p class="hide">"<?php echo $this->truncWords($excerpt->post_content, $instance['length']); ?>"<br />
 				<span class="testimonial-title"><?php echo (($instance['linked']=='yes') ? '<a href="'.get_permalink($excerpt->ID).'">'.$excerpt->post_title.'</a>' : $excerpt->post_title); ?></span></p>

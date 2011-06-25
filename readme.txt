@@ -3,8 +3,8 @@ Contributors: jackreichert
 Donate link: http://www.jackreichert.com/the-human-fund/
 Tags: category, random, excerpts, testimonials
 Requires at least: 2.8
-Tested up to: 3.0.1
-Stable tag: trunk
+Tested up to: 3.2
+Stable tag: 1.2.6
 
 Creates a widget that takes randomly a number of excerpts from a category of your choice and fades them in and out.
 
@@ -29,6 +29,11 @@ Yes.
 The foo bar is not a problem here. Don't worry about it.
 
 == Changelog ==
+= 1.2.6 =
+* Tested on 3.2 RC1
+* "all categories" had stopped working in this version - Fixed.
+
+
 = 1.2.5 =
 * Fixed title when not linked
 
