@@ -29,6 +29,9 @@ Yes.
 The foo bar is not a problem here. Don't worry about it.
 
 == Changelog ==
+= 1.3.1 =
+* Opacity bug
+
 = 1.3 =
 * Fixed IE bugs
 * Rewrote the js to make it more efficient

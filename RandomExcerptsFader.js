@@ -16,8 +16,9 @@ function RandomPostFader_js() {
 
     $j(active).fadeOut(fade, function(){
 		$j(next).addClass('active')
-		$j(next).fadeIn(fade);
 		$j(active).removeClass('active');    
+		$j(next).fadeIn(fade);		
+		$j(next).attr('style','display:block; opacity: 1;');		
     });
 
         
