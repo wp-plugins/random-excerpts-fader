@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Random Excerpts Fader
-Plugin URI: http://www.jackreichert.com/2010/09/random-excerpts-fader/
+Plugin URI: http://www.jackreichert.com/plugins/random-excerpts-fader/
 Description: Creates a widget that takes randomly a number of excerpts from a category of your choice and fades them in and out. Perfect for displaying testimonials.
-Version: 1.3.1
+Version: 1.4
 Author: Jack Reichert	
 Author URI: http://www.jackreichert.com/about
 License: GPLv2
@@ -26,18 +26,19 @@ License: GPLv2
     
 */
 
-class reFader extends WP_Widget {
+class reFader_widget extends WP_Widget {
 
-	function reFader() { 	// The widget construct. Initiating our plugin data.
-		$widgetData = array( 'classname' => 'reFader', 'description' => __( 'Display excerpts from a category of your choice and fades them in and out... jQuery Style!' ) );
-		$this->WP_Widget('reFader', __('Random Excerpts Fader'), $widgetData);
+	function reFader_widget() { 	// The widget construct. Initiating our plugin data.
+		$widgetData = array( 'classname' => 'reFader_widget', 'description' => __( 'Display excerpts from a category of your choice and fades them in and out... jQuery Style!' ) );
+		$this->WP_Widget('reFader_widget', __('Random Excerpts Fader'), $widgetData);
 	} 
 
 	function widget($args, $instance) { // Displays the widget on the screen.
 		extract($args);
 		echo $before_widget;
 		echo $before_title . $instance['title'] . $after_title; 
-		$this->RandomExcerptsFader($instance);
+		$widget_instance = new reFader;
+		echo $widget_instance->reFader($instance);
 		echo $after_widget;
 	}
 	
@@ -83,16 +84,35 @@ class reFader extends WP_Widget {
 				<input type="text" size="5" name="<?php echo $this->get_field_name('duration'); ?>" id="<?php echo $this->get_field_id('duration'); ?>" value="<?php echo $instance['duration']; ?>" />
 			</p>
 			<p>
-				<label for="<?php echo $this->get_field_id('height'); ?>">Widget Height:</label>			
-				<input type="text" size="5" name="<?php echo $this->get_field_name('height'); ?>" id="<?php echo $this->get_field_id('height'); ?>" value="<?php echo $instance['height']; ?>" /> px<br>
-				<span style="font-size:10px;">Leave Blank for auto height</span>
-			</p>			
-			<p>
 				<label for="<?php echo $this->get_field_id('linked'); ?>">Link title to post?</label>			
-				<input type="checkbox" name="<?php echo $this->get_field_name('linked'); ?>" id="<?php echo $this->get_field_id('linked'); ?>" value="yes" <?php echo (($instance['linked']=='yes')?'checked="checked"':''); ?> />
+				<select name="<?php echo $this->get_field_name('linked'); ?>" id="<?php echo $this->get_field_id('linked'); ?>">
+					<option value="yes" <?php echo (($instance['linked']=='yes')?'selected="selected"':''); ?>>Yes</option>
+					<option value="no" <?php echo (($instance['linked']!='yes')?'selected="selected"':''); ?>>No</option>
+				</select>
 			</p>
+			<p>
+				<label for="<?php echo $this->get_field_id('url'); ?>">Link all to one url:</label>			
+				<input type="text" size="13" name="<?php echo $this->get_field_name('url'); ?>" id="<?php echo $this->get_field_id('url'); ?>" value="<?php echo $instance['url']; ?>" />
+			</p>			
 		</div>
 <?php	} 
+
+} 
+
+class reFader {
+	function reFader($options = array()){
+		$excerpts = get_posts('showposts='.$options['amount'].(($options['cat']!='-1')?'&cat='.$options['cat']:'').'&orderby=rand');
+		$all_excerpts = '';
+		foreach ($excerpts as $excerpt){
+			$all_excerpts .= '<p>'.(($options['length'] != "-1") ? $this->truncWords($excerpt->post_content, intval($options['length'])) : $excerpt->post_content).
+			'<span class="testimonial-title">' . (($options['linked']=='yes' || $options['url'] != '') ? '<a href="'.(($options['url'] != '') ? $options['url'] :get_permalink($excerpt->ID)).'">'.$excerpt->post_title.'</a>' : $excerpt->post_title). '</span>'.
+			'</p>';
+		}
+		return '<div class="RandomExcerpts">'.
+		$all_excerpts.
+		'<div class="duration" style="display:none;">' . $options['duration'] . '</div>'.
+		'</div>';
+	}
 
 	function truncWords($string, $words = 55) { //creates custom size excerpt
 	    $string = explode(' ', strip_tags($string));
@@ -101,25 +121,31 @@ class reFader extends WP_Widget {
 	    }
 	
 	    return implode(' ', $string);
+	}	
+
+	function reFader_shortcode( $atts ) {
+		$defaults = array(
+			"title" 	=> "Random Excerpts",
+			"cat" 		=> "-1",
+			"amount" 	=> "5", 
+			"length" 	=> "50", 
+			"duration" 	=> "5000", 
+			"linked" 	=> "yes",
+			"url"		=> "" );
+		extract( shortcode_atts( $defaults , $atts ) );
+		$newVals = array("title" => $title, "cat" => $cat, "amount" => $amount, "length" => $length, "duration" => $duration, "linked" => $linked, "url" => $url);
+		$merged = array_merge($defaults, $newVals);
+
+		$widget_instance = new reFader;
+		return $widget_instance->reFader($merged);
 	}
+	
+}
 
-	function RandomExcerptsFader($instance) { // gets the posts ?>
-		<div id="RandomExcerpts" <?php echo ($instance['height']!='') ? 'style="height:'.$instance['height'].'px"' : ''; ?>>
-		<?php 
-			$excerpts = get_posts('showposts='.$instance['amount'].(($instance['cat']!='-1')?'&cat='.$instance['cat']:'').'&orderby=rand');
-			foreach($excerpts as $excerpt) : ?>
-				<p>"<?php echo $this->truncWords($excerpt->post_content, $instance['length']); ?>"<br />
-				<span class="testimonial-title"><?php echo (($instance['linked']=='yes') ? '<a href="'.get_permalink($excerpt->ID).'">'.$excerpt->post_title.'</a>' : $excerpt->post_title); ?></span></p>
-	<?php 	endforeach; ?>
-			<div id="duration"><?php echo $instance['duration']; ?></div>
-		</div>		
-	<?php 
-	} 
-
-} 
+add_shortcode( 'reFader', array('reFader','reFader_shortcode' ));
 
 // Register the widget.
-add_action('widgets_init', create_function('', 'return register_widget("reFader");'));
+add_action('widgets_init', create_function('', 'return register_widget("reFader_widget");'));
 wp_enqueue_script("jquery");
 wp_enqueue_script('reFader_js', WP_PLUGIN_URL.'/random-excerpts-fader/RandomExcerptsFader.js', array('jquery')); 
 wp_register_style('reFaderStylesheet', WP_PLUGIN_URL . '/random-excerpts-fader/RandomExcerptsFader.css');
