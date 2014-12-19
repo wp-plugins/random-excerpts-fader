@@ -3,7 +3,7 @@ Contributors: jackreichert
 Donate link: http://www.jackreichert.com/the-human-fund/
 Tags: category, random, excerpts, testimonials
 Requires at least: 2.8
-Tested up to: 3.2.1
+Tested up to: 4.1
 Stable tag: trunk
 
 Creates a widget that takes randomly a number of excerpts from a category of your choice and fades them in and out.
