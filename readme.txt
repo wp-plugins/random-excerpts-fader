@@ -30,7 +30,7 @@ This will show 5 (amount) posts from category #23 (cat). It will show 50 (length
 
 = Are you planning on developing this further to include thumbnails? =
 
-<s>Eventually.</s> Done!
+~~Eventually.~~ Done!
 
 = Is it true that you coded the first version of this plugin live  on stage at a WordCamp, with Matt in the audience? =
 
