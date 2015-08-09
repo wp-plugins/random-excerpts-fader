@@ -2,8 +2,8 @@
 Contributors: jackreichert
 Donate link: http://www.jackreichert.com/the-human-fund/
 Tags: category, random, excerpts, testimonials
-Requires at least: 2.8
-Tested up to: 4.2.2
+Requires at least: 3.5
+Tested up to: 4.3
 Stable tag: trunk
 
 Creates a widget that takes randomly a number of excerpts from a category of your choice and fades them in and out.
@@ -30,13 +30,21 @@ This will show 5 (amount) posts from category #23 (cat). It will show 50 (length
 
 = Are you planning on developing this further to include thumbnails? =
 
-Eventually.
+<strike>Eventually.</strike> Done!
+
+= Is it true that you coded the first version of this plugin live  on stage at a WordCamp, with Matt in the audience? =
+
+Most definitely.
 
 = What about foo bar? =
 
 The foo bar is not a problem here. Don't worry about it.
 
 == Changelog ==
+= 2.0 =
+* Added featured images as an alternative to excerpts.
+* Fixed JS issues with excerpt height in some browsers.
+
 = 1.4 =
 * Added Shortcode
 * Cleaned up jQuery
