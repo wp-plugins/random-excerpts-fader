@@ -4,7 +4,7 @@
 Plugin Name: Random Excerpts Fader
 Plugin URI: http://www.jackreichert.com/plugins/random-excerpts-fader/
 Description: Creates a widget that takes randomly a number of excerpts from a category of your choice and fades them in and out. Perfect for displaying testimonials.
-Version: 1.4
+Version: 2.0
 Author: Jack Reichert	
 Author URI: http://www.jackreichert.com/
 License: GPLv2
